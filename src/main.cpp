@@ -1,7 +1,9 @@
 #include <Arduino.h>
+#include <Wire.h>
 #include <time.h>
 #include <stdint.h>
 #include <Adafruit_NeoPixel.h>
+#include <Adafruit_SHT31.h>
 #include <ETH.h>
 #include <WiFiClientSecure.h>
 #include <PubSubClient.h>
@@ -17,6 +19,8 @@
 #include "door.h"
 // Obsługa czytnika
 #include "reader.h"
+// Dane z czujników
+#include "environment.h"
 // Obsługa żądań z serwera MQTT
 #include "callback.h"
 
@@ -32,14 +36,33 @@ void setup() {
   pinMode(LOCK, OUTPUT);
   //pinMode(BUZZER, OUTPUT);
   pinMode(LOCK_SWITCH, INPUT_PULLUP);
+
+  pinMode(LIGHT_1, OUTPUT);
+  pinMode(LIGHT_2, OUTPUT);
+  digitalWrite(LIGHT_1, HIGH);
+  digitalWrite(LIGHT_2, HIGH);
   // Rozpoczęcie komunikacji z czytnikiem przez UART
   RfidSerial.setRxBufferSize(RFID_RX_BUFFER_SIZE);
   RfidSerial.begin(RFID_BAUD_RATE, SERIAL_8N1, READER_RX, READER_TX);
   // Konfiguracja paska LED
-  strip.begin();
-  strip.setBrightness(32);
-  strip.clear();
-  strip.show();
+  strip_1.begin();
+  strip_2.begin();
+  strip_1.setBrightness(32);
+  strip_2.setBrightness(32);
+  strip_1.clear();
+  strip_2.clear();
+  strip_1.show();
+  strip_2.show();
+  
+  // Konfiguracja czujnika temperatury i wilgotności
+  Serial.println("SHT31 test");
+  if (! sht30.begin(0x44)) {
+    Serial.println("Nie znaleziono czujnika sht30");
+  }
+
+  Serial.printf("Temperatura: %f", sht30.readTemperature());
+  Serial.printf("Wilgotność: %f", sht30.readHumidity());
+  ////////////////////// DO EDYCJI W ODDZIELNEJ FUNKCJI
 
   // Rozpoczęcie Ethernetu 
   startEthernet();

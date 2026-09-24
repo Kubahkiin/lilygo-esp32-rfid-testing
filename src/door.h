@@ -1,3 +1,8 @@
+/**
+ * \file door.h
+ * Obsługa drzwi, działanie elektrozamka i sprawdzanie czy drzwi są otwarte i czy powinny być otwarte lub zamknięte.
+ * Sterowanie oświetleniem drzwi.
+ */
 #ifndef _DOOR_H_
 #define _DOOR_H_
 /** @name Flagi
@@ -46,8 +51,9 @@ constexpr uint32_t FLASH_INTERVAL_MS = 500;
  */
 ///@{
 constexpr uint8_t PIXEL_COUNT = 3;
-constexpr neoPixelType STRIP_FORMAT = NEO_GRBW + NEO_KHZ800;
-Adafruit_NeoPixel strip(PIXEL_COUNT, LIGHT, STRIP_FORMAT);
+constexpr neoPixelType STRIP_FORMAT = NEO_WRGB + NEO_KHZ800;
+Adafruit_NeoPixel strip_1(PIXEL_COUNT, RGB_1, STRIP_FORMAT);
+Adafruit_NeoPixel strip_2(PIXEL_COUNT, RGB_2, STRIP_FORMAT);
 ///@}
 
 void doorStatus();
@@ -85,9 +91,11 @@ void lockOpen() {
     digitalWrite(LOCK, HIGH);
     lockOpened_ms = millis();
     for (uint8_t pixel = 0; pixel < PIXEL_COUNT; ++pixel) {
-        strip.setPixelColor(pixel, strip.Color(0, 255, 0, 0));
+        strip_1.setPixelColor(pixel, strip_1.Color(0, 255, 0, 0));
+        strip_2.setPixelColor(pixel, strip_2.Color(0, 255, 0, 0));
     }
-    strip.show();
+    strip_1.show();
+    strip_2.show();
 }
 
 /**
@@ -113,8 +121,10 @@ void lockSecurity() {
         doorIsClosed = true;
         digitalWrite(LOCK, LOW);
         // digitalWrite(BUZZER, LOW);
-        strip.clear();
-        strip.show();
+        strip_1.clear();
+        strip_2.clear();
+        strip_1.show();
+        strip_2.show();
         doorIsOpen = false;
         warningIsOn = false;
         alarmIsOn = false;
@@ -130,9 +140,11 @@ void lockSecurity() {
         doorOpen();
         for (uint8_t pixel = 0; pixel < PIXEL_COUNT; ++pixel)
         {
-            strip.setPixelColor(pixel, strip.Color(0, 0, 0, 255));
+            strip_1.setPixelColor(pixel, strip_1.Color(0, 0, 0, 255));
+            strip_2.setPixelColor(pixel, strip_2.Color(0, 0, 0, 255));
         }
-        strip.show();
+        strip_1.show();
+        strip_2.show();
         Serial.print("\nDrzwi zostały otwarte.");
     }
 
@@ -143,9 +155,11 @@ void lockSecurity() {
         doorIsClosed = false;
         for (uint8_t pixel = 0; pixel < PIXEL_COUNT; ++pixel)
         {
-            strip.setPixelColor(pixel, strip.Color(255, 0, 0, 0));
+            strip_1.setPixelColor(pixel, strip_1.Color(255, 0, 0, 0));
+            strip_2.setPixelColor(pixel, strip_2.Color(255, 0, 0, 0));
         }
-        strip.show();
+        strip_1.show();
+        strip_2.show();
         Serial.print("\nDrzwi nie powinny być otwarte");
     }
 }
@@ -174,9 +188,11 @@ void doorSecurity() {
         alarmIsOn = true;
         //digitalWrite(BUZZER, HIGH);
          for (uint8_t pixel = 0; pixel < PIXEL_COUNT; ++pixel) {
-            strip.setPixelColor(pixel, strip.Color(255, 0, 0, 0));
+            strip_1.setPixelColor(pixel, strip_1.Color(255, 0, 0, 0));
+            strip_2.setPixelColor(pixel, strip_2.Color(255, 0, 0, 0));
         }
-        strip.show();
+        strip_1.show();
+        strip_2.show();
         Serial.print("\nAlarm włączony");
     }
 
@@ -194,14 +210,17 @@ void flashLed() {
     if(warningIsOn && millis() - lastFlash_ms > FLASH_INTERVAL_MS && !alarmIsOn) {
         if (!flashed) {
         for (uint8_t pixel = 0; pixel < PIXEL_COUNT; ++pixel) {
-            strip.setPixelColor(pixel, strip.Color(255, 0, 0, 0));
+            strip_1.setPixelColor(pixel, strip_1.Color(255, 255, 0, 0));
+            strip_2.setPixelColor(pixel, strip_2.Color(255, 255, 0, 0));
         }
         flashed = true;
         } else {
-        strip.clear();
+        strip_1.clear();
+        strip_2.clear();
         flashed = false;
         }
-        strip.show();
+        strip_1.show();
+        strip_2.show();
         lastFlash_ms = millis();
     }
 }

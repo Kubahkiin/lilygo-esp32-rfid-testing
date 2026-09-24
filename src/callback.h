@@ -1,3 +1,9 @@
+/**
+ * \file callback.h
+ * Obsługa i interpretacja wiadomości MQTT.
+ * Tu umieszczane są wszelkie działania, które mają zostać wykonane po przyjściu wiadomości na wybrane tematy.
+ * Oprócz tematu można też sprawdzić treść wiadomości i jeśli to konieczne, dostosować reakcję programu na konkretną treść
+ */
 #ifndef _CALLBACK_H_
 #define _CALLBACK_H_
 
@@ -52,6 +58,14 @@ void callback(char *topic, byte *message, unsigned int length)
   else if (String(topic) == diagnostics_reader_antenna_detection_request)
   {
     startAntennaDetection();
+  }
+  else if (String(topic) == diagnostics_environment_temperature_request)
+  {
+    publishEnvironmentTemperature();
+  }
+  else if (String(topic) == diagnostics_environment_humidity_request)
+  {
+    publishEnvironmentHumidity();
   }
 }
 

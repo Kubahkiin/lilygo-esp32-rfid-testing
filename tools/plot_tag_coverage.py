@@ -12,115 +12,117 @@ from pathlib import Path
 
 
 CSV_DATA = """
-epc,antenna_count,A1,A2,A4,A5,A6,A7,A10,A11,A12,A13,A14,A16
-0050,1,0,0,0,0,0,0,1,0,0,0,0,0
-0051,3,0,0,0,0,1,0,1,1,0,0,0,0
-0052,5,1,0,1,0,0,1,1,1,0,0,0,0
-0053,1,0,0,0,0,0,0,0,1,0,0,0,0
-0054,1,0,0,0,0,0,0,0,1,0,0,0,0
-0055,5,0,0,0,0,0,1,1,0,1,1,1,0
-0056,3,0,1,0,0,0,0,1,1,0,0,0,0
-0057,9,0,1,1,1,1,1,0,1,1,1,0,1
-0058,5,1,1,0,0,0,1,0,1,0,1,0,0
-0059,5,0,0,1,0,0,1,0,1,1,1,0,0
-0060,2,0,0,0,0,1,0,1,0,0,0,0,0
-0061,7,0,0,1,0,1,1,1,1,1,1,0,0
-0062,5,0,0,0,0,1,1,1,1,1,0,0,0
-0063,1,0,0,0,0,0,0,0,1,0,0,0,0
-0064,1,0,0,0,0,0,0,0,1,0,0,0,0
-0065,3,0,0,0,1,1,0,0,0,0,0,1,0
-0066,5,1,0,0,1,0,1,0,1,1,0,0,0
-0067,8,1,1,1,1,1,1,1,0,0,0,0,1
-0068,8,1,1,1,1,0,1,0,1,0,0,1,1
-0069,5,0,0,1,0,0,1,0,1,1,1,0,0
-0070,4,1,1,1,0,1,0,0,0,0,0,0,0
-0071,5,1,0,1,1,1,1,0,0,0,0,0,0
-0072,6,1,1,1,1,1,1,0,0,0,0,0,0
-0073,6,1,1,1,1,1,1,0,0,0,0,0,0
-0074,4,1,1,0,1,0,1,0,0,0,0,0,0
-0075,5,1,1,1,1,1,0,0,0,0,0,0,0
-0076,6,1,1,1,1,1,1,0,0,0,0,0,0
-0077,6,1,1,1,1,0,1,0,1,0,0,0,0
-0078,5,1,1,1,1,0,0,0,0,0,0,1,0
-0079,5,1,1,1,1,0,1,0,0,0,0,0,0
-0080,4,1,1,1,1,0,0,0,0,0,0,0,0
-0081,9,1,1,1,1,1,1,0,1,0,0,1,1
-0082,6,1,1,1,1,1,1,0,0,0,0,0,0
-0083,7,1,1,0,1,1,1,0,1,0,0,1,0
-0084,5,1,1,1,1,0,1,0,0,0,0,0,0
-0085,6,1,1,1,1,1,0,0,1,0,0,0,0
-0086,8,1,1,1,1,1,1,0,1,0,1,0,0
-0087,2,1,0,1,0,0,0,0,0,0,0,0,0
-0088,7,1,0,1,1,0,1,0,1,1,0,1,0
-0089,4,1,1,1,1,0,0,0,0,0,0,0,0
-0090,4,1,0,0,0,1,0,1,1,0,0,0,0
-0091,6,1,1,1,1,1,1,0,0,0,0,0,0
-0092,3,0,0,0,1,0,1,0,1,0,0,0,0
-0093,4,0,0,1,0,1,1,0,1,0,0,0,0
-0094,2,0,0,0,0,0,1,0,1,0,0,0,0
-0095,4,1,1,0,1,1,0,0,0,0,0,0,0
-0096,3,0,1,0,1,1,0,0,0,0,0,0,0
-0097,4,1,0,1,1,0,1,0,0,0,0,0,0
-0098,4,1,1,1,0,0,1,0,0,0,0,0,0
-0099,5,1,0,1,1,0,1,0,1,0,0,0,0
-0100,7,1,1,1,1,1,0,1,1,0,0,0,0
-0101,9,1,1,1,1,1,1,0,1,1,1,0,0
-0102,4,1,0,0,1,1,1,0,0,0,0,0,0
-0103,8,1,1,1,1,1,1,0,1,0,1,0,0
-0104,2,0,0,0,0,0,1,0,1,0,0,0,0
-0105,5,1,1,0,1,1,0,1,0,0,0,0,0
-0106,6,0,1,1,1,1,1,0,1,0,0,0,0
-0107,5,1,0,1,1,0,1,0,1,0,0,0,0
-0108,9,1,0,1,1,1,1,0,1,1,1,0,1
-0109,6,1,1,0,1,1,0,0,1,0,1,0,0
-0110,4,0,0,0,0,0,0,1,1,1,0,1,0
-0111,5,0,0,0,0,0,0,1,1,1,1,1,0
-0112,6,0,0,0,0,0,0,1,1,1,1,1,1
-0113,4,0,0,0,0,0,0,0,1,1,1,0,1
-0114,3,0,0,0,0,0,0,0,1,0,1,0,1
-0115,2,0,0,0,0,0,0,0,0,0,1,1,0
-0116,2,0,0,0,0,0,0,0,0,1,0,1,0
-0117,4,0,0,0,0,0,0,1,0,1,1,1,0
-0118,5,0,0,0,0,0,0,0,1,1,1,1,1
-0119,7,0,1,1,0,0,1,0,1,1,1,0,1
-0120,2,0,0,0,0,0,0,1,0,1,0,0,0
-0121,4,0,0,0,0,0,0,1,1,1,1,0,0
-0122,5,1,0,1,0,0,1,0,1,1,0,0,0
-0123,2,0,0,0,0,0,0,0,1,1,0,0,0
-0124,1,0,0,0,0,0,0,0,1,0,0,0,0
-0125,2,0,0,0,0,0,0,1,0,0,0,1,0
-0126,5,0,0,0,1,1,0,1,0,1,0,1,0
-0127,4,0,0,0,0,0,1,0,1,0,1,0,1
-0128,4,0,0,0,0,0,1,0,1,0,1,1,0
-0129,4,0,0,0,0,0,1,0,1,1,1,0,0
-0130,3,0,0,0,0,0,0,0,0,1,1,1,0
-0131,9,1,1,0,0,0,1,1,1,1,1,1,1
-0132,5,0,0,0,0,0,0,0,1,1,1,1,1
-0133,4,0,0,0,0,0,0,0,1,1,0,1,1
-0134,4,0,0,0,0,0,0,0,0,1,1,1,1
-0135,6,1,0,0,0,0,0,0,1,1,1,1,1
-0136,4,0,0,0,0,0,0,1,0,1,0,1,1
-0137,5,0,0,0,1,0,0,1,0,0,1,1,1
-0138,10,1,1,1,0,1,1,1,0,1,1,1,1
-0139,5,0,1,0,0,0,0,1,0,0,1,1,1
-0140,6,0,0,0,0,0,0,1,1,1,1,1,1
-0141,6,0,0,0,0,0,0,1,1,1,1,1,1
-0142,6,0,0,0,0,0,0,1,1,1,1,1,1
-0143,5,0,0,0,0,0,0,0,1,1,1,1,1
-0144,3,0,0,0,0,0,0,0,0,1,1,0,1
-0145,4,0,0,0,0,0,0,1,0,1,1,0,1
-0146,6,0,0,0,0,0,0,1,1,1,1,1,1
-0147,5,0,0,0,1,0,0,1,1,0,1,1,0
-0148,5,0,0,1,0,0,0,0,1,0,1,1,1
-0149,3,0,0,0,0,0,0,0,1,0,1,0,1
+epc,antenna_count,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16
+0000,4,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0
+0001,7,1,1,1,1,0,0,0,0,0,0,0,0,1,1,0,1
+0002,6,1,1,1,1,0,0,0,0,0,0,0,0,1,1,0,0
+0003,6,1,1,0,1,1,0,0,0,0,0,0,0,1,1,0,0
+0004,5,1,1,1,1,0,0,0,0,0,0,0,0,1,0,0,0
+0005,8,1,1,1,0,1,0,1,0,0,0,0,0,1,1,1,0
+0006,11,1,1,1,1,1,1,0,1,0,0,0,0,1,1,1,1
+0007,10,1,1,1,1,1,1,0,1,0,0,0,0,1,1,1,0
+0008,11,1,1,1,1,1,1,1,1,0,0,1,0,0,1,1,0
+0009,12,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,0
+0010,9,1,1,1,1,1,0,1,1,0,0,0,0,0,1,1,0
+0011,8,1,1,1,0,1,0,1,0,0,0,0,0,1,1,1,0
+0012,6,1,1,1,1,0,0,0,0,0,0,0,0,1,1,0,0
+0013,9,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,0
+0014,6,1,1,0,1,0,1,0,0,0,0,0,0,1,1,0,0
+0015,9,1,1,1,1,1,0,1,0,0,0,0,0,1,1,1,0
+0016,9,1,1,1,1,1,0,1,0,0,0,0,0,1,1,0,1
+0017,10,1,1,1,0,1,1,1,1,0,0,0,0,1,1,1,0
+0018,8,1,0,1,1,1,1,1,0,0,0,0,0,0,1,1,0
+0019,7,1,1,0,1,0,1,1,0,0,0,0,0,1,1,0,0
+0020,8,1,1,1,1,1,1,0,0,0,0,0,0,1,0,1,0
+0021,7,0,1,1,0,1,1,1,0,0,0,0,0,0,1,1,0
+0022,7,1,0,1,0,1,1,0,1,0,0,0,0,0,1,1,0
+0023,7,0,1,1,1,1,1,0,0,0,0,1,0,0,1,0,0
+0024,8,1,1,1,1,1,0,0,0,0,0,1,0,1,1,0,0
+0025,8,1,0,1,1,1,0,1,0,0,0,0,0,1,1,1,0
+0026,6,1,1,1,1,0,0,0,0,0,0,0,0,1,0,1,0
+0027,8,1,1,1,1,1,1,0,0,0,0,0,0,1,0,1,0
+0028,8,0,1,1,1,1,1,0,0,0,0,0,1,1,1,0,0
+0029,10,1,1,1,1,1,1,0,0,1,0,1,0,1,1,0,0
+0030,9,0,0,1,1,1,1,1,0,0,0,0,0,1,1,1,1
+0031,9,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,0
+0032,7,0,1,0,1,1,1,0,1,0,0,0,0,0,1,1,0
+0033,10,1,1,1,1,1,1,0,1,0,1,0,0,0,1,0,1
+0034,5,1,1,0,1,0,1,0,0,0,0,0,0,1,0,0,0
+0035,7,1,0,0,0,1,1,1,0,0,0,0,0,1,1,1,0
+0036,7,1,1,1,1,0,0,1,0,0,0,0,0,1,0,1,0
+0037,9,0,1,1,1,0,1,1,1,0,1,0,0,1,1,0,0
+0038,9,0,1,1,1,1,1,0,1,0,0,0,0,1,1,1,0
+0039,9,0,1,0,1,1,1,1,1,1,0,0,0,1,1,0,0
+0040,9,1,0,1,0,1,1,1,0,1,1,0,0,0,0,1,1
+0041,11,1,1,1,1,1,1,1,0,0,1,1,0,0,0,1,1
+0042,9,0,1,1,0,1,1,1,1,0,0,0,0,1,0,1,1
+0043,8,1,1,0,0,1,1,1,1,0,0,0,0,0,0,1,1
+0044,9,1,1,1,1,1,1,0,0,1,0,0,0,1,0,0,1
+0045,9,0,0,1,0,1,0,1,0,1,0,0,1,1,1,1,1
+0046,13,1,0,1,1,1,1,1,1,1,0,1,0,1,1,1,1
+0047,13,0,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1
+0048,10,1,1,1,1,1,1,0,1,0,1,1,0,0,0,0,1
+0049,15,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1
+0050,12,1,1,0,1,1,0,1,1,0,0,1,1,1,1,1,1
+0051,7,0,0,1,0,1,1,1,1,0,0,0,0,0,0,1,1
+0052,7,0,0,1,0,1,1,1,1,0,0,0,0,0,0,1,1
+0053,7,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,1
+0054,7,0,0,0,1,1,1,1,1,0,0,1,0,0,0,0,1
+0055,5,0,0,1,0,0,0,0,0,1,0,0,0,1,0,1,1
+0056,12,1,1,1,1,1,0,1,0,1,1,1,1,0,0,1,1
+0057,11,0,1,1,0,1,1,1,1,1,1,1,0,0,0,1,1
+0058,9,1,1,0,0,0,0,1,1,1,1,1,0,0,0,1,1
+0059,10,0,0,1,1,0,1,0,1,1,1,0,1,0,1,1,1
+0060,5,0,0,0,0,1,0,1,0,1,0,0,0,0,1,1,0
+0061,9,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0
+0062,10,0,0,0,0,1,1,1,1,1,1,1,1,0,1,0,1
+0063,6,0,0,0,0,0,1,1,0,0,1,0,1,0,0,1,1
+0064,11,0,0,1,1,1,1,0,1,1,1,1,1,0,0,1,1
+0065,5,0,0,0,0,1,1,1,0,1,0,1,0,0,0,0,0
+0066,10,0,0,1,0,1,1,1,1,1,0,1,1,0,1,0,1
+0067,12,0,1,1,1,1,1,1,1,1,1,1,0,0,1,0,1
+0068,9,1,0,0,0,1,1,1,1,0,1,1,1,0,0,0,1
+0069,9,1,0,0,0,0,1,1,1,1,1,1,1,0,0,0,1
+0070,5,0,0,0,0,0,0,1,0,1,1,1,0,0,0,0,1
+0071,9,0,0,0,0,1,0,1,1,1,1,1,1,0,0,1,1
+0072,6,0,0,0,0,1,0,1,1,1,1,1,0,0,0,0,0
+0073,9,0,0,1,0,1,1,1,1,1,1,0,1,0,0,0,1
+0074,7,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,1
+0075,7,0,0,0,0,0,1,0,1,1,0,1,1,0,0,1,1
+0076,7,0,0,0,0,1,1,1,0,1,0,1,0,0,0,1,1
+0077,7,0,0,0,0,1,1,1,1,1,0,1,0,0,0,0,1
+0078,6,0,0,0,0,1,1,1,0,1,1,0,1,0,0,0,0
+0079,8,0,0,0,0,1,1,0,1,1,1,1,1,0,0,0,1
+0080,6,0,0,0,0,1,1,0,0,1,1,1,1,0,0,0,0
+0081,9,0,0,0,1,1,1,0,1,1,1,1,1,0,0,0,1
+0082,9,1,0,0,0,0,1,1,1,1,1,1,1,0,0,0,1
+0083,5,0,0,0,0,1,0,0,0,1,1,1,1,0,0,0,0
+0084,8,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,1
+0085,6,0,0,0,0,1,1,1,0,1,0,1,1,0,0,0,0
+0086,9,0,0,1,0,1,1,1,1,1,1,1,1,0,0,0,0
+0087,7,0,0,0,0,0,1,1,0,1,1,1,1,0,0,0,1
+0088,9,1,0,0,0,1,1,0,1,1,1,1,1,0,0,0,1
+0089,8,0,0,0,0,1,1,0,1,1,1,1,1,0,0,0,1
+0090,4,0,0,0,0,1,0,0,1,0,0,1,1,0,0,0,0
+0091,5,0,0,0,0,0,0,0,1,1,1,0,1,0,0,0,1
+0092,6,0,0,0,0,0,0,1,1,1,1,0,1,0,0,0,1
+0093,7,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,1
+0094,4,0,0,0,0,1,0,0,0,1,1,0,1,0,0,0,0
+0095,6,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,1
+0096,6,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,1
+0097,10,0,0,1,0,1,1,1,1,1,1,1,1,0,0,0,1
+0098,7,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,1
+0099,8,0,0,0,0,1,0,1,1,1,1,0,1,0,0,1,1
 """
 
 # Ustaw False, jeżeli wykres ma zostać tylko zapisany, bez otwierania okna.
 SHOW_CHART = True
 
 MAX_ANTENNAS = 16
-FIRST_TAG_NUMBER = 50
-TAGS_PER_SHELF = 20
+FIRST_TAG_NUMBER = 0
+TAGS_PER_ROW = 10
+ROWS_PER_SHELF = 2
+TAGS_PER_SHELF = TAGS_PER_ROW * ROWS_PER_SHELF
 SHELF_COUNT = 5
 SHELF_COLORS = ("#2563eb", "#16a34a", "#fac44a", "#9333ea", "#aa6767")
 SHELVES = tuple(
@@ -134,6 +136,19 @@ SHELVES = tuple(
 )
 TOTAL_TAG_COUNT = SHELF_COUNT * TAGS_PER_SHELF
 LAST_TAG_NUMBER = FIRST_TAG_NUMBER + TOTAL_TAG_COUNT - 1
+# Kolejne numery od lewej do prawej: najpierw górny, potem dolny rząd.
+SHELF_ROW_NAMES = ("Górny rząd", "Dolny rząd")
+SHELF_ROWS = tuple(
+    (
+        shelf_name,
+        row_name,
+        first_tag + row_index * TAGS_PER_ROW,
+        first_tag + (row_index + 1) * TAGS_PER_ROW - 1,
+        shelf_color,
+    )
+    for shelf_name, first_tag, _, shelf_color in SHELVES
+    for row_index, row_name in enumerate(SHELF_ROW_NAMES)
+)
 
 OUTPUT_PATH = (
     Path(__file__).resolve().parent / "output" / "tag_coverage.png"
@@ -320,9 +335,9 @@ def create_charts(
     from matplotlib.ticker import MaxNLocator
 
     coverage_figure, axes_grid = plt.subplots(
-        nrows=SHELF_COUNT,
+        nrows=len(SHELF_ROWS),
         ncols=1,
-        figsize=(15, 1.5 + SHELF_COUNT * 3.4),
+        figsize=(12, 1.5 + SHELF_COUNT * 4.2),
         sharey=True,
         squeeze=False,
         constrained_layout=True,
@@ -352,8 +367,8 @@ def create_charts(
         if detection.antenna_count == 0
     }
 
-    for axis, (shelf_name, first_tag, last_tag, shelf_color) in zip(
-        axes, SHELVES
+    for axis, (shelf_name, row_name, first_tag, last_tag, shelf_color) in zip(
+        axes, SHELF_ROWS
     ):
         tag_numbers = list(range(first_tag, last_tag + 1))
         values = [
@@ -384,8 +399,11 @@ def create_charts(
             linewidth=0.7,
         )
 
-        axis.set_title(f"{shelf_name}: tagi {first_tag}–{last_tag}")
+        axis.set_title(
+            f"{shelf_name} — {row_name.lower()}: tagi {first_tag}–{last_tag}"
+        )
         axis.set_xticks(tag_numbers)
+        axis.set_xlim(first_tag - 0.5, last_tag + 0.5)
         for tick_label, tag_number in zip(
             axis.get_xticklabels(),
             tag_numbers,
@@ -430,98 +448,102 @@ def create_charts(
 
     matrix_figure = None
     if antenna_numbers:
-        tag_numbers = [
-            tag_number
-            for _, first_tag, last_tag, _ in SHELVES
-            for tag_number in range(first_tag, last_tag + 1)
-        ]
-        detection_matrix = [
-            [
-                int(
-                    tag_detections[tag_number].antennas is not None
-                    and antenna_number
-                    in tag_detections[tag_number].antennas
-                )
-                for tag_number in tag_numbers
-            ]
-            for antenna_number in antenna_numbers
-        ]
         detection_color_map = ListedColormap(["#e5e7eb", "#f97316"])
 
-        matrix_height = max(4.5, 2.5 + len(antenna_numbers) * 0.5)
-        matrix_width = max(16, len(tag_numbers) * 0.32)
-        matrix_figure, matrix_axis = plt.subplots(
+        matrix_height = max(6, 3 + len(antenna_numbers) * 0.8)
+        matrix_width = max(12, SHELF_COUNT * 4.5)
+        matrix_figure, matrix_axes = plt.subplots(
+            nrows=ROWS_PER_SHELF,
+            ncols=SHELF_COUNT,
             figsize=(matrix_width, matrix_height),
+            squeeze=False,
             constrained_layout=True,
         )
-        matrix_axis.imshow(
-            detection_matrix,
-            aspect="auto",
-            interpolation="nearest",
-            cmap=detection_color_map,
-            vmin=0,
-            vmax=1,
-        )
-        matrix_axis.set_title(
+        matrix_figure.suptitle(
             "Tagi wykryte przez anteny w każdej próbie",
             fontsize=15,
             fontweight="bold",
         )
-        matrix_axis.set_xlabel("Numer taga")
-        matrix_axis.set_ylabel("Antena")
-        matrix_axis.set_xticks(range(len(tag_numbers)))
-        matrix_axis.set_xticklabels(tag_numbers, fontsize=8)
-        for tick_label, tag_number in zip(
-            matrix_axis.get_xticklabels(),
-            tag_numbers,
+        matrix_figure.supxlabel("Numer taga")
+        matrix_figure.supylabel("Antena")
+        for matrix_axis, (
+            shelf_name,
+            row_name,
+            first_tag,
+            last_tag,
+            _,
+        ) in zip(
+            matrix_axes.T.flat,
+            SHELF_ROWS,
         ):
-            if tag_number in uncovered_tag_numbers:
-                tick_label.set_color("#b91c1c")
-                tick_label.set_fontweight("bold")
-        matrix_axis.set_yticks(range(len(antenna_numbers)))
-        matrix_axis.set_yticklabels(
-            [f"A{number}" for number in antenna_numbers]
-        )
-        for shelf_boundary in range(
-            TAGS_PER_SHELF,
-            len(tag_numbers),
-            TAGS_PER_SHELF,
-        ):
-            matrix_axis.axvline(
-                shelf_boundary - 0.5,
-                color="#0f172a",
-                linewidth=2,
+            tag_numbers = list(range(first_tag, last_tag + 1))
+            detection_matrix = [
+                [
+                    int(
+                        tag_detections[tag_number].antennas is not None
+                        and antenna_number
+                        in tag_detections[tag_number].antennas
+                    )
+                    for tag_number in tag_numbers
+                ]
+                for antenna_number in antenna_numbers
+            ]
+            matrix_axis.imshow(
+                detection_matrix,
+                aspect="auto",
+                interpolation="nearest",
+                cmap=detection_color_map,
+                vmin=0,
+                vmax=1,
             )
-        for column_index, tag_number in enumerate(tag_numbers):
-            if tag_number in uncovered_tag_numbers:
-                matrix_axis.axvspan(
-                    column_index - 0.5,
-                    column_index + 0.5,
-                    facecolor="#fee2e2",
-                    edgecolor="#b91c1c",
-                    hatch="///",
-                    linewidth=1,
-                    alpha=0.4,
-                )
-        matrix_axis.set_xticks(
-            [index - 0.5 for index in range(1, len(tag_numbers))],
-            minor=True,
-        )
-        matrix_axis.set_yticks(
-            [index - 0.5 for index in range(1, len(antenna_numbers))],
-            minor=True,
-        )
-        matrix_axis.grid(
-            which="minor",
-            color="#ffffff",
-            linewidth=0.6,
-        )
-        matrix_axis.tick_params(
-            which="minor",
-            bottom=False,
-            left=False,
-        )
-        matrix_axis.legend(
+            matrix_axis.set_title(
+                f"{shelf_name} — {row_name.lower()}\n"
+                f"tagi {first_tag}–{last_tag}",
+                fontsize=11,
+            )
+            matrix_axis.set_xticks(range(TAGS_PER_ROW))
+            matrix_axis.set_xticklabels(tag_numbers, fontsize=8)
+            for tick_label, tag_number in zip(
+                matrix_axis.get_xticklabels(),
+                tag_numbers,
+            ):
+                if tag_number in uncovered_tag_numbers:
+                    tick_label.set_color("#b91c1c")
+                    tick_label.set_fontweight("bold")
+            matrix_axis.set_yticks(range(len(antenna_numbers)))
+            matrix_axis.set_yticklabels(
+                [f"A{number}" for number in antenna_numbers]
+            )
+            for column_index, tag_number in enumerate(tag_numbers):
+                if tag_number in uncovered_tag_numbers:
+                    matrix_axis.axvspan(
+                        column_index - 0.5,
+                        column_index + 0.5,
+                        facecolor="#fee2e2",
+                        edgecolor="#b91c1c",
+                        hatch="///",
+                        linewidth=1,
+                        alpha=0.4,
+                    )
+            matrix_axis.set_xticks(
+                [index - 0.5 for index in range(1, TAGS_PER_ROW)],
+                minor=True,
+            )
+            matrix_axis.set_yticks(
+                [index - 0.5 for index in range(1, len(antenna_numbers))],
+                minor=True,
+            )
+            matrix_axis.grid(
+                which="minor",
+                color="#ffffff",
+                linewidth=0.6,
+            )
+            matrix_axis.tick_params(
+                which="minor",
+                bottom=False,
+                left=False,
+            )
+        matrix_figure.legend(
             handles=[
                 Patch(
                     color="#f97316",
@@ -538,8 +560,7 @@ def create_charts(
                     label="Brak anteny niezawodnej",
                 ),
             ],
-            loc="upper center",
-            bbox_to_anchor=(0.5, -0.12),
+            loc="outside lower center",
             ncol=3,
         )
 
@@ -572,7 +593,7 @@ def create_charts(
             antenna_figure, antenna_axes_grid = plt.subplots(
                 nrows=SHELF_COUNT,
                 ncols=1,
-                figsize=(15, 1.5 + SHELF_COUNT * 2.1),
+                figsize=(12, 1.5 + SHELF_COUNT * 2.1),
                 squeeze=False,
                 constrained_layout=True,
             )
@@ -583,7 +604,7 @@ def create_charts(
                 fontsize=15,
                 fontweight="bold",
             )
-            antenna_figure.supxlabel("Numer taga")
+            antenna_figure.supxlabel("W polu: numer taga oraz wynik wykrycia (1/0)")
 
             for axis, (
                 shelf_name,
@@ -591,53 +612,69 @@ def create_charts(
                 last_tag,
                 _,
             ) in zip(antenna_axes, SHELVES):
-                shelf_tag_numbers = list(
-                    range(first_tag, last_tag + 1)
-                )
-                shelf_values = [
-                    int(
-                        tag_detections[tag_number].antennas is not None
-                        and antenna_number
-                        in tag_detections[tag_number].antennas
+                shelf_tag_numbers = [
+                    list(range(row_start, row_start + TAGS_PER_ROW))
+                    for row_start in range(
+                        first_tag, last_tag + 1, TAGS_PER_ROW
                     )
-                    for tag_number in shelf_tag_numbers
+                ]
+                shelf_values = [
+                    [
+                        int(
+                            tag_detections[tag_number].antennas is not None
+                            and antenna_number
+                            in tag_detections[tag_number].antennas
+                        )
+                        for tag_number in row_tag_numbers
+                    ]
+                    for row_tag_numbers in shelf_tag_numbers
                 ]
                 axis.imshow(
-                    [shelf_values],
+                    shelf_values,
+                    origin="upper",
                     aspect="auto",
                     interpolation="nearest",
                     cmap=detection_color_map,
                     vmin=0,
                     vmax=1,
-                    extent=(
-                        first_tag - 0.5,
-                        last_tag + 0.5,
-                        0,
-                        1,
-                    ),
                 )
                 axis.set_title(
                     f"{shelf_name}: tagi {first_tag}–{last_tag}"
                 )
-                axis.set_xticks(shelf_tag_numbers)
-                axis.set_yticks([])
+                axis.set_xticks([])
+                axis.set_yticks(range(ROWS_PER_SHELF))
+                axis.set_yticklabels(SHELF_ROW_NAMES)
+                axis.set_xticks(
+                    [index - 0.5 for index in range(1, TAGS_PER_ROW)],
+                    minor=True,
+                )
+                axis.set_yticks(
+                    [index - 0.5 for index in range(1, ROWS_PER_SHELF)],
+                    minor=True,
+                )
+                axis.grid(which="minor", color="#ffffff", linewidth=2)
+                axis.tick_params(which="both", bottom=False, left=False)
 
-                for tag_number, detected in zip(
+                for row_index, (row_tag_numbers, row_values) in enumerate(zip(
                     shelf_tag_numbers,
                     shelf_values,
-                ):
-                    axis.text(
-                        tag_number,
-                        0.5,
-                        str(detected),
-                        ha="center",
-                        va="center",
-                        fontsize=9,
-                        fontweight="bold",
-                        color="#ffffff" if detected else "#475569",
-                    )
+                )):
+                    for column_index, (tag_number, detected) in enumerate(zip(
+                        row_tag_numbers,
+                        row_values,
+                    )):
+                        axis.text(
+                            column_index,
+                            row_index,
+                            f"{tag_number}\n{detected}",
+                            ha="center",
+                            va="center",
+                            fontsize=10,
+                            fontweight="bold",
+                            color="#ffffff" if detected else "#475569",
+                        )
 
-            antenna_axes[-1].legend(
+            antenna_figure.legend(
                 handles=[
                     Patch(
                         color="#f97316",
@@ -648,8 +685,7 @@ def create_charts(
                         label="Co najmniej jeden brak (0)",
                     ),
                 ],
-                loc="upper center",
-                bbox_to_anchor=(0.5, -0.35),
+                loc="outside lower center",
                 ncol=2,
             )
             antenna_output_path = (

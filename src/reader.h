@@ -56,7 +56,7 @@ constexpr uint8_t ANTENNA_SELECTOR_BASE = 0x80;
 constexpr uint32_t ANTENNA_PROBE_MAX_DURATION_MS = 2000;
 constexpr uint32_t ANTENNA_PROBE_TIMEOUT_RECOVERY_MS = 400;
 
-constexpr uint8_t Q_VALUE = 0x06; // 2^Q tags in the range of the antena <0 - 15>
+constexpr uint8_t Q_VALUE = 0x07; // 2^Q tags in the range of the antena <0 - 15>
 constexpr uint8_t SESSION = 0x00; // S0, S1, S2, S3, FF is auto
 constexpr uint8_t TAG_FOCUS = 0x00;
 

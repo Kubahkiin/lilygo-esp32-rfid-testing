@@ -1,3 +1,7 @@
+/**
+ * \file topics.h
+ * Definicje topiców mqtt w postaci zmiennych, w celu łatwej modyfikacji i porządku w programie.
+ */
 #ifndef _TOPICS_H_
 #define _TOPICS_H_
 
@@ -48,6 +52,10 @@ String diagnostics_reader_temperature_request = location + "diagnostics/reader/t
 String diagnostics_reader_info_request = location + "diagnostics/reader/info/request"; 
 /** Detekcja anten */
 String diagnostics_reader_antenna_detection_request = location + "diagnostics/reader/antennas/request";
+/** Temperatura w lodówce */
+String diagnostics_environment_temperature_request = location + "diagnostics/environment/temperature/request";
+/** Wilgotność powietrza w lodówce */
+String diagnostics_environment_humidity_request = location + "diagnostics/environment/humidity/request";
 ///@}
 
 /** @name Topici diagonostyczne output
@@ -56,6 +64,16 @@ String diagnostics_reader_antenna_detection_request = location + "diagnostics/re
 ///@{
 /** Timestamp */
 String diagnostics_timestamp = location + "diagnostics/timestamp";
+/** Temperatura czytnika */
+String diagnostics_reader_temperature = location + "diagnostics/reader/temperature";
+/** Informacje o czytniku */
+String diagnostics_reader_info = location + "diagnostics/reader/info"; 
+/** Detekcja anten */
+String diagnostics_reader_antenna_detection = location + "diagnostics/reader/antennas";
+/** Temperatura w lodówce */
+String diagnostics_environment_temperature = location + "diagnostics/environment/temperature";
+/** Wilgotność powietrza w lodówce */
+String diagnostics_environment_humidity = location + "diagnostics/environment/humidity";
 ///@}
 
 #endif

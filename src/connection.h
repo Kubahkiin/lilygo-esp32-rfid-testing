@@ -1,3 +1,8 @@
+/**
+ * \file connection.h
+ * Konfiguracja połączenia internetowego, połączenia z serwerem ntp oraz połączenie z brokerem MQTT
+ * i funkcje powiązane np. timestamp
+ */
 #ifndef _CONNECTION_H_
 #define _CONNECTION_H_
 
@@ -156,6 +161,8 @@ void reconnect() {
   client.subscribe(diagnostics_reader_temperature_request.c_str());
   client.subscribe(diagnostics_reader_info_request.c_str());
   client.subscribe(diagnostics_reader_antenna_detection_request.c_str());
+  client.subscribe(diagnostics_environment_temperature_request.c_str());
+  client.subscribe(diagnostics_environment_humidity_request.c_str());
 }
 
 /**
